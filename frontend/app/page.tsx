@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -9,11 +9,8 @@ import {
   PieChart as PieIcon,
   Filter,
   RefreshCw,
-  AlertCircle,
   Clock,
-  ArrowUpRight,
-  ShieldCheck,
-  CheckCircle2
+  Info
 } from "lucide-react";
 import {
   ScatterChart,
@@ -26,9 +23,9 @@ import {
   BarChart,
   Bar,
   Cell,
-  CartesianGrid,
-  Legend
+  CartesianGrid
 } from "recharts";
+import AboutModal from "../components/AboutModal";
 
 interface Offering {
   id: string;
@@ -70,6 +67,7 @@ export default function PortfolioDashboard() {
   const [segmentFilter, setSegmentFilter] = useState("All");
   const [typeFilter, setTypeFilter] = useState("All");
   const [loading, setLoading] = useState(true);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   const fetchData = async () => {
     setLoading(true);
@@ -116,7 +114,7 @@ export default function PortfolioDashboard() {
           </p>
         </div>
 
-        {/* Global Filters */}
+        {/* Global Filters & Info Action */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-xs">
             <Filter className="w-3.5 h-3.5 text-indigo-400" />
@@ -145,6 +143,15 @@ export default function PortfolioDashboard() {
               <option value="Service" className="bg-slate-900">Service</option>
             </select>
           </div>
+
+          <button
+            onClick={() => setIsAboutOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 transition-colors text-xs font-mono"
+            title="System Architecture & Guidelines"
+          >
+            <Info className="w-3.5 h-3.5 text-indigo-400" />
+            <span>Info</span>
+          </button>
 
           <button
             onClick={fetchData}
@@ -394,6 +401,12 @@ export default function PortfolioDashboard() {
           </table>
         </div>
       </div>
+
+      {/* Architecture & Decision Protocol Modal */}
+      <AboutModal
+        isOpen={isAboutOpen}
+        onClose={() => setIsAboutOpen(false)}
+      />
     </div>
   );
 }
