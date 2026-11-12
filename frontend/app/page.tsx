@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -273,7 +273,7 @@ export default function PortfolioDashboard() {
                             <div className="bg-slate-900 border border-slate-700 p-3 rounded-lg shadow-xl text-xs space-y-1">
                               <p className="font-bold text-white">{item.name}</p>
                               <p className="text-slate-300">Category: {item.category} ({item.type})</p>
-                              <p className="text-indigo-400">Quadrant: {item.strategic_quadrant}</p>
+                              <p className="text-indigo-400">Quadrant: {item.strategic_quadrant.split(" (")[0]}</p>
                               <p className="text-emerald-400">Revenue: {formatCurrency(item.revenue)}</p>
                               <p className="text-slate-300">Net Margin: {item.margin_pct.toFixed(1)}%</p>
                               <p className="text-amber-400">YoY Growth: {item.growth_rate}%</p>
@@ -309,18 +309,18 @@ export default function PortfolioDashboard() {
                 <span className="text-xs text-slate-400 font-mono">{data?.offerings.length || 0} Offerings Tracked</span>
               </div>
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-800">
+                <table className="w-full text-left text-[11px]">
+                  <thead className="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[9px] border-b border-slate-800">
                     <tr>
-                      <th className="px-4 py-3">Offering Name</th>
-                      <th className="px-4 py-3">Category</th>
-                      <th className="px-4 py-3">Type</th>
-                      <th className="px-4 py-3 text-right">Revenue</th>
-                      <th className="px-4 py-3 text-right">Direct Cost</th>
-                      <th className="px-4 py-3 text-right">Net Contribution</th>
-                      <th className="px-4 py-3 text-right">Margin %</th>
-                      <th className="px-4 py-3 text-right">Hourly Yield</th>
-                      <th className="px-4 py-3">Strategic Action</th>
+                      <th className="px-2.5 py-2.5">Offering Name</th>
+                      <th className="px-2.5 py-2.5">Category</th>
+                      <th className="px-2.5 py-2.5">Type</th>
+                      <th className="px-2.5 py-2.5 text-right">Revenue</th>
+                      <th className="px-2.5 py-2.5 text-right">Direct Cost</th>
+                      <th className="px-2.5 py-2.5 text-right">Net Contribution</th>
+                      <th className="px-2.5 py-2.5 text-right">Margin %</th>
+                      <th className="px-2.5 py-2.5 text-right">Hourly Yield</th>
+                      <th className="px-2.5 py-2.5">Strategic Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800/60">
@@ -334,28 +334,28 @@ export default function PortfolioDashboard() {
                             isSelected ? "bg-indigo-950/40 border-l-2 border-indigo-400" : "hover:bg-slate-900/50"
                           }`}
                         >
-                          <td className="px-4 py-3 font-medium text-white">{item.name}</td>
-                          <td className="px-4 py-3 text-slate-400">{item.category}</td>
-                          <td className="px-4 py-3">
-                            <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${
+                          <td className="px-2.5 py-2.5 font-medium text-white">{item.name}</td>
+                          <td className="px-2.5 py-2.5 text-slate-400">{item.category}</td>
+                          <td className="px-2.5 py-2.5">
+                            <span className={`px-2 py-0.5 rounded text-[10px] font-medium whitespace-nowrap inline-block ${
                               item.type === "Product" ? "bg-cyan-500/10 text-cyan-400" : "bg-purple-500/10 text-purple-400"
                             }`}>
                               {item.type}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-right text-slate-200 font-mono">{formatCurrency(item.revenue)}</td>
-                          <td className="px-4 py-3 text-right text-slate-400 font-mono">{formatCurrency(item.direct_cost)}</td>
-                          <td className="px-4 py-3 text-right text-emerald-400 font-mono font-medium">{formatCurrency(item.net_contribution)}</td>
-                          <td className="px-4 py-3 text-right font-mono">
+                          <td className="px-2.5 py-2.5 text-right text-slate-200 font-mono">{formatCurrency(item.revenue)}</td>
+                          <td className="px-2.5 py-2.5 text-right text-slate-400 font-mono">{formatCurrency(item.direct_cost)}</td>
+                          <td className="px-2.5 py-2.5 text-right text-emerald-400 font-mono font-medium">{formatCurrency(item.net_contribution)}</td>
+                          <td className="px-2.5 py-2.5 text-right font-mono">
                             <span className={item.margin_pct >= 40 ? "text-emerald-400 font-semibold" : item.margin_pct >= 20 ? "text-amber-400" : "text-rose-400"}>
                               {item.margin_pct.toFixed(1)}%
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-right text-slate-300 font-mono">
+                          <td className="px-2.5 py-2.5 text-right text-slate-300 font-mono">
                             ${item.hourly_yield.toFixed(0)}/hr
                           </td>
-                          <td className="px-4 py-3">
-                            <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${
+                          <td className="px-2.5 py-2.5">
+                            <span className={`px-2 py-0.5 rounded text-[10px] font-medium whitespace-nowrap inline-block ${
                               item.strategic_quadrant.includes("Star")
                                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                                 : item.strategic_quadrant.includes("Cash")
@@ -364,7 +364,7 @@ export default function PortfolioDashboard() {
                                 ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
                                 : "bg-rose-500/20 text-rose-300 border border-rose-500/30"
                             }`}>
-                              {item.strategic_quadrant}
+                              {item.strategic_quadrant.split(" (")[0]}
                             </span>
                           </td>
                         </tr>
